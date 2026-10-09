@@ -1,0 +1,17 @@
+{
+  "HomePage": {
+    "iam": {
+      "begin": "Je suis ",
+      "developer": "un développeur",
+      "gamer": "un gamer incroyable",
+      "javascript": "un amoureux du JavaScript"
+    }
+  },
+  "Header": {
+    "locale": {
+      "langselector": "Selectionne la langue",
+      "en": "Anglais",
+      "fr": "Français"
+    }
+  }
+}

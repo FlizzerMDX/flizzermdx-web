@@ -1,0 +1,22 @@
+{
+ "github": {
+   "profile": {
+     "username": "FlizzerMDX",
+     "url": "https://github.com/FlizzerMDX"
+   },
+   "project":{
+    "url": "https://github.com/FlizzerMDX/nextjs-template",
+    "api_url": "https://api.github.com/repos/FlizzerMDX/nextjs-template"
+   }
+ },
+ "socials":{
+   "github":{
+     "label": "GitHub",
+     "url": "https://github.com/FlizzerMDX"
+   },
+   "linkedin": {
+     "label": "LinkedIn",
+     "url": "https://www.linkedin.com/in/aloismenoud"
+   }
+ }
+}
