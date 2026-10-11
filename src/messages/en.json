@@ -13,5 +13,42 @@
       "en": "English",
       "fr": "French"
     }
+  },
+  "Footer": {
+    "label": "Made with ❤️ by {developer} ✨"
+  },
+  "About": {
+    "age": "{age} years old",
+    "os": "I use <os></os> btw",
+    "ide": "I use <ide></ide> btw",
+    "socials": "Social media:",
+    "profilecomplete": "Profile initialization completed !",
+    "portfolio": "Take a look at my portfolio."
+  },
+  "Projects": {
+    "nextjs-template":{
+      "title": "Next.js template",
+      "description": "Template Next.js for my websites"
+    },
+    "yoops":{
+      "title": "Yoops",
+      "description": "Your solution to manage webhooks with one link"
+    },
+    "zeloria-bot-discord":{
+      "title": "Discord Bot for Zeloria",
+      "description": "Discord Bot for Zeloria minecraft server"
+    },
+    "discord-ticket-reader":{
+      "title": "Discord ticket reader",
+      "description": "Reader for Zeloria Discord ticket"
+    },
+    "myplate":{
+      "title": "MyPlate",
+      "description": "Mobile app listing dishes ideas"
+    },
+    "eeee":{
+      "title": "EEEE",
+      "description": "Exchange Events Exporter for EPFL"
+    }
   }
 }

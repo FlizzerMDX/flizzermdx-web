@@ -13,5 +13,42 @@
       "en": "Anglais",
       "fr": "Français"
     }
+  },
+  "Footer": {
+    "label": "Fais avec le ❤️ par {developer} ✨"
+  },
+  "About": {
+    "age": "{age} ans",
+    "os": "J'utilise <os></os>",
+    "ide": "J'utilise <ide></ide>",
+    "socials": "Réseaux sociaux:",
+    "profilecomplete": "Initialisation du profil terminé !",
+    "portfolio": "Va jeter un oeil à mon portfolio."
+  },
+  "Projects": {
+    "nextjs-template":{
+      "title": "Modèle Next.js",
+      "description": "Modèle Next.js pour mes sites web"
+    },
+    "yoops":{
+      "title": "Yoops",
+      "description": "Votre solution pour gérer les webhooks avec un seul lien"
+    },
+    "zeloria-bot-discord":{
+      "title": "Robot discord pour Zeloria",
+      "description": "Robot pour le discord du server minecraft Zeloria"
+    },
+    "discord-ticket-reader":{
+      "title": "Lecteur de ticket discord",
+      "description": "Lecteur de ticket discord pour Zeloria"
+    },
+    "myplate":{
+      "title": "MyPlate",
+      "description": "Application mobile listant des idées de repas"
+    },
+    "eeee":{
+      "title": "EEEE",
+      "description": "Exportateur D'Évènement Exchange pour l'EPFL"
+    }
   }
 }

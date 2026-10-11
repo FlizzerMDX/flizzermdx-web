@@ -97,7 +97,7 @@ export default function Header() {
             ))
           }
         </nav>
-        <ScrollProgress className="sticky" />
+        <ScrollProgress className="sticky" key={path} />
       </div>
     </>
   )
