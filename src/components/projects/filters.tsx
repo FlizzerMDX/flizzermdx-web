@@ -33,7 +33,7 @@ function ClearAll(
           disabled={showedDropdownElements.length === 0}
         >{translations("clearall")}</Button>
       </PopoverTrigger>
-      <PopoverContent className="w-50" align="end">
+      <PopoverContent className="w-50 z-10" align="end">
         <div className="flex flex-col items-center justify-center gap-2">
           <span>{translations("confirmclear")}</span>
           <div className="flex flex-row justify-between items-center w-full">
@@ -102,14 +102,14 @@ export default function Filters({ dropdownElements }: { dropdownElements: { name
     <div className="flex flex-col gap-2 sm:gap-0 sm:flex-row items-center justify-between w-full mb-6">
       <div className="flex flex-col sm:flex-row items-center gap-3 w-80 sm:w-full">
         <div className="flex flex-row flex-wrap justify-center sm:justify-start gap-2 mx-auto sm:mx-0">
-          <DropdownMenu onOpenChange={() => setSearch("")}>
+          <DropdownMenu modal={false} onOpenChange={() => setSearch("")}>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" className="focus-visible:ring-0">
                 <FunnelPlus/>
                 {translations("label")}
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-56" align="start">
+            <DropdownMenuContent className="w-56 z-10" align="start">
               <div
                 className="flex items-center px-2 pb-2 pt-1"
                 onKeyDown={(e) => {
@@ -119,7 +119,7 @@ export default function Filters({ dropdownElements }: { dropdownElements: { name
                 <Input
                   placeholder="Search attributes"
                   type="text"
-                  className="overflow-hidden border-0 bg-transparent focus-visible:ring-0"
+                  className="border-0 bg-transparent focus-visible:ring-0"
                   autoFocus
                   onChange={(e) => setSearch(e.target.value)}
                 />
