@@ -13,17 +13,19 @@ import { NumberTicker } from "../ui/number-ticker";
 import Link from "next/link";
 import { ScrollProgress } from "../ui/scroll-progress";
 import { cn } from "@/lib/utils";
+import { useTranslations } from "next-intl";
 
 export default function Header() {
   const path = usePathname();
   const [starsCount, setStarsCount] = useState(0);
-  const [activeTab, setActiveTab] = useState<string | null>(null)
+  const [activeTab, setActiveTab] = useState<string | null>(null);
+  const translations = useTranslations("Header");
 
   const tabs = [
-    { label: "Home", value: "home", href: "/" },
-    { label: "Projects", value: "projects", href: "/projects" },
-    { label: "About", value: "about", href: "/about" },
-    { label: "Contact", value: "contact", href: "/contact" },
+    { label: translations("home"), value: "home", href: "/" },
+    { label: translations("projects"), value: "projects", href: "/projects" },
+    { label: translations("about"), value: "about", href: "/about" },
+    { label: translations("contact"), value: "contact", href: "/contact" },
   ];
 
   useEffect(() => {
@@ -41,6 +43,7 @@ export default function Header() {
       <header className="flex flex-row justify-between px-4 pt-4 bg-background">
         <div className="flex flex-row gap-2 items-center">
           <Globe color="#999999" />
+          {/*<Image src="/rick_face.svg" alt="rick face" width={24} height={24} className="w-6 dark:invert"/>*/}
           <span className="font-semibold">
             /
           </span>
@@ -73,7 +76,7 @@ export default function Header() {
                 key={tab.label}
                 href={tab.href}
                 // className={"relative rounded-md flex items-center h-8 px-4 z-20 bg-transparent cursor-pointer select-none transition-colors"}
-                className="relative rounded-lg px-4 py-2 text-sm"
+                className="relative rounded-lg px-4 py-2"
                 onMouseEnter={() => setActiveTab(tab.href)}
               >
 
@@ -89,7 +92,7 @@ export default function Header() {
                   />
                 )}
 
-                <span className={cn("block text-sm text-zinc-500 relative z-10", tab.href === path ? "font-bold text-foreground" : "")}>
+                <span className={cn("block sm:text-sm text-[12px] text-zinc-500 relative z-10", tab.href === path ? "font-bold text-foreground" : "")}>
                   {tab.label}
                 </span>
 

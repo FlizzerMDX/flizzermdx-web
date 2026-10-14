@@ -8,6 +8,8 @@ import { SiCapacitor, SiFlask, SiJavascript, SiNextdotjs, SiPython, SiReact, SiT
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { getProjects } from "@/utils/projects";
+import Image from "next/image";
+import { Construction, GraduationCap, TimerReset } from "lucide-react";
 
 const frameworks = [
   { id: "reactjs", translation: "React.js", icon: <SiReact className="text-foreground" /> },
@@ -23,6 +25,18 @@ const languages = [
 
 const runtimes = [
   { id: "capacitorjs", translation: "Capacitor.js", icon: <SiCapacitor className="text-foreground" /> },
+];
+
+const situations = [
+  { id: "freetime", translation: "FreeTime", icon: <TimerReset className="text-foreground" /> },
+  { id: "formation", translation: "Formation", icon: <GraduationCap className="text-foreground" /> },
+  { id: "internship", translation: "Internship", icon: <Construction className="text-foreground" /> },
+];
+
+const organizations = [
+  { id: "EPFL", translation: "EPFL", icon: <Image src="/logo/EPFL_logo.svg" alt="EPFL" width={40} height={40} className="h-full w-full object-contain dark:invert"/>},
+  { id: "ETML", translation: "ETML", icon: <Image src="/logo/ETML_logo.svg" alt="ETML" width={40} height={40} className="h-full w-full object-contain dark:invert"/>},
+  { id: "zeloria", translation: "zeloria", icon: <Image src="/logo/zeloria_logo.svg" alt="zeloria" width={40} height={40} className="h-full w-full object-contain dark:invert"/>},
 ];
 
 export default function ProjectsView() {
@@ -41,6 +55,8 @@ export default function ProjectsView() {
   const [selectedFrameworks, setSelectedFrameworks] = useState<string[]>([]);
   const [selectedLanguages, setSelectedLanguages] = useState<string[]>([]);
   const [selectedRuntimes, setSelectedRuntimes] = useState<string[]>([]);
+  const [selectedSituations, setSelectedSituations] = useState<string[]>([]);
+  const [selectedOrganizations, setSelectedOrganizations] = useState<string[]>([]);
 
   const dropdownElements = [
     {
@@ -63,6 +79,20 @@ export default function ProjectsView() {
       selections: runtimes,
       value: selectedRuntimes,
       setter: setSelectedRuntimes,
+    },
+    {
+      name: "situations",
+      translate: translations("situations"),
+      selections: situations,
+      value: selectedSituations,
+      setter: setSelectedSituations,
+    },
+    {
+      name: "organizations",
+      translate: translations("organizations"),
+      selections: organizations,
+      value: selectedOrganizations,
+      setter: setSelectedOrganizations,
     },
   ];
 

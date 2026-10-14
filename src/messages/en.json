@@ -1,13 +1,24 @@
 {
   "HomePage": {
+    "welcome": "Hello There! My name is <name></name>",
     "iam": {
-      "begin": "I am ",
-      "developer": "a developer",
-      "gamer": "an amazing gamer",
-      "javascript": "a JavaScript lover"
+      "begin": "I am a ",
+      "tags": [
+        "Devops developer",
+        "Frontend developer",
+        "Backend developer",
+        "Full-stack developer",
+        "JavaScript developer",
+        "TypeScript developer",
+        "Python developer"
+      ]
     }
   },
   "Header": {
+    "home": "Home",
+    "projects": "Projects",
+    "about": "About",
+    "contact": "Contact",
     "locale": {
       "langselector": "Select Language",
       "en": "English",
@@ -27,9 +38,19 @@
   },
   "Projects": {
     "filters":{
+      "label": "Filters",
+      "attributes": "Attributes",
+      "allassigned": "All are assigned",
+      "noresult": "No result",
+      "clearall": "Clear all",
+      "confirmclear": "Are you sure to clear all filters ?",
+      "cancelclearbutton": "Cancel",
+      "confirmclearbutton": "Clear",
       "frameworks": "Framework",
       "languages": "Language",
-      "runtimes": "Runtime"
+      "runtimes": "Runtime",
+      "situations": "Situations",
+      "organizations": "Organizations"
     },
     "nextjs-template":{
       "title": "Next.js template",

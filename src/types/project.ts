@@ -14,12 +14,20 @@ export type Runtime = (
   "capacitorjs"
 )
 
+export type Situation = (
+  "freetime"
+  | "formation"
+  | "internship"
+)
+
+export type Organization = (
+  "ETML"
+  | "EPFL"
+  | "zeloria"
+)
+
 export interface Project{
   public: boolean;
-  situation: {
-    type: string;
-    name: string;
-  };
   preview: string;
   github: {
     url: string;
@@ -29,6 +37,8 @@ export interface Project{
     languages: Language[];
     frameworks: Framework[];
     runtimes: Runtime[];
+    organizations: Organization[];
+    situations: Situation[];
   };
 }
 

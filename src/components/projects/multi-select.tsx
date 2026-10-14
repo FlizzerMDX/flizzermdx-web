@@ -15,7 +15,7 @@ export const MultiSelect = ({ selections, placeholder, selectedSelections, setSe
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" className="px-0 focus-visible:ring-0 text-muted-foreground hover:text-muted-foreground! w-25">
+        <Button variant="outline" className="px-0 focus-visible:ring-0 text-muted-foreground hover:text-muted-foreground! w-30">
           {
             selectedSelections.length > 0 ?
               <HoverCard openDelay={10} closeDelay={100}>
@@ -27,7 +27,7 @@ export const MultiSelect = ({ selections, placeholder, selectedSelections, setSe
                           <Avatar key={selection} size="sm">
                             <AvatarFallback>
                               {
-                                selections.filter((select) => select.id === selection)[0].icon
+                                selections.filter((select) => select.id.toLowerCase() === selection.toLowerCase())[0].icon
                               }
                             </AvatarFallback>
                           </Avatar>
@@ -56,7 +56,7 @@ export const MultiSelect = ({ selections, placeholder, selectedSelections, setSe
                     {
                       selectedSelections.map((selection) => (
                         <li key={selection}>
-                          {selections.filter((select) => select.id === selection)[0].translation}
+                          {selections.filter((select) => select.id.toLowerCase() === selection.toLowerCase())[0].translation}
                         </li>
                       ))
                     }
@@ -102,7 +102,9 @@ export const MultiSelect = ({ selections, placeholder, selectedSelections, setSe
                 }}
                 className="flex flex-row justify-between">
                 <span className="flex flex-row gap-1 items-center">
-                  {selection.icon}
+                  <div className="size-3.75">
+                    {selection.icon}
+                  </div>
                   {selection.translation}
                 </span>
                 {

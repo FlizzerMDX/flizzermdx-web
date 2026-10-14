@@ -8,11 +8,13 @@ import { Dispatch, JSX, SetStateAction, useEffect, useState } from "react"
 import FiltersSelect from "./filters-select"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover"
+import { useTranslations } from "next-intl"
 
 function ClearAll(
   { showedDropdownElements, setShowedDropdownElements, dropdownElements }:
     { showedDropdownElements: string[]; setShowedDropdownElements: Dispatch<SetStateAction<string[]>>; dropdownElements: { name: string; translate: string; selections: { id: string; translation: string; icon: React.JSX.Element; }[]; value: string[]; setter: Dispatch<SetStateAction<string[]>>; }[] }) {
   const [clearAllOpen, setClearAllOpen] = useState(false);
+  const translations = useTranslations("Projects.filters");
 
   const handleResetAll = () => {
     for (const element of dropdownElements) {
@@ -29,14 +31,14 @@ function ClearAll(
           onClick={() => setClearAllOpen(true)}
           variant="outline"
           disabled={showedDropdownElements.length === 0}
-        >Clear all</Button>
+        >{translations("clearall")}</Button>
       </PopoverTrigger>
       <PopoverContent className="w-50" align="end">
         <div className="flex flex-col items-center justify-center gap-2">
-          <span>Are you sure to clear all filters ?</span>
+          <span>{translations("confirmclear")}</span>
           <div className="flex flex-row justify-between items-center w-full">
-            <Button onClick={() => setClearAllOpen(false)}>Cancel</Button>
-            <Button variant="destructive" onClick={() => handleResetAll()}>Clear</Button>
+            <Button onClick={() => setClearAllOpen(false)}>{translations("cancelclearbutton")}</Button>
+            <Button variant="destructive" onClick={() => handleResetAll()}>{translations("confirmclearbutton")}</Button>
           </div>
         </div>
       </PopoverContent>
@@ -47,14 +49,7 @@ function ClearAll(
 export default function Filters({ dropdownElements }: { dropdownElements: { name: string; translate: string; selections: { id: string; translation: string; icon: React.JSX.Element; }[]; value: string[]; setter: Dispatch<SetStateAction<string[]>>; }[] }) {
   const [search, setSearch] = useState("");
   const [showedDropdownElements, setShowedDropdownElements] = useState<string[]>([]);
-
-  // const handleResetAll = () => {
-  //   for (const element of dropdownElements) {
-  //     element.setter([]);
-  //   }
-  //   setClearAllOpen(false);
-  //   setShowedDropdownElements([]);
-  // }
+  const translations = useTranslations("Projects.filters");
 
   const handleDelete = (element: { name: string; translate: string; selections: { id: string; translation: string; icon: JSX.Element; }[]; value: string[]; setter: Dispatch<SetStateAction<string[]>>; }) => {
     setShowedDropdownElements([...showedDropdownElements.filter((elem) => elem != element.name)])
@@ -105,13 +100,13 @@ export default function Filters({ dropdownElements }: { dropdownElements: { name
 
   return (
     <div className="flex flex-col gap-2 sm:gap-0 sm:flex-row items-center justify-between w-full mb-6">
-      <div className="flex flex-col sm:flex-row items-center gap-3 w-70 sm:w-full">
+      <div className="flex flex-col sm:flex-row items-center gap-3 w-80 sm:w-full">
         <div className="flex flex-row flex-wrap justify-center sm:justify-start gap-2 mx-auto sm:mx-0">
           <DropdownMenu onOpenChange={() => setSearch("")}>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" className="focus-visible:ring-0">
                 <FunnelPlus/>
-                Filters
+                {translations("label")}
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56" align="start">
@@ -131,7 +126,7 @@ export default function Filters({ dropdownElements }: { dropdownElements: { name
               </div>
               <DropdownMenuSeparator />
               <DropdownMenuGroup>
-                <DropdownMenuLabel>Attributes</DropdownMenuLabel>
+                <DropdownMenuLabel>{translations("attributes")}</DropdownMenuLabel>
                 {
                   dropdownElements.filter((elem) => elem.translate.toLowerCase().includes(search.toLowerCase())).length > 0 ?
                     dropdownElements.filter((elem) => elem.translate.toLowerCase().includes(search.toLowerCase()) && !showedDropdownElements.includes(elem.name)).length > 0 ?
@@ -140,8 +135,8 @@ export default function Filters({ dropdownElements }: { dropdownElements: { name
                           {elem.translate}
                         </DropdownMenuItem>
                       ))
-                      : <DropdownMenuLabel>Tout est assigné</DropdownMenuLabel>
-                    : <DropdownMenuLabel>Aucun résultat</DropdownMenuLabel>
+                      : <DropdownMenuLabel>{translations("allassigned")}</DropdownMenuLabel>
+                    : <DropdownMenuLabel>{translations("noresult")}</DropdownMenuLabel>
                 }
               </DropdownMenuGroup>
             </DropdownMenuContent>

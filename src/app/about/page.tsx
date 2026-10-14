@@ -61,16 +61,16 @@ const About = () => {
         {/*<TypingAnimation className="text-muted-foreground">
           Profile initialization completed !
         </TypingAnimation>*/}
-        <TypingAnimation className="text-muted-foreground">
+        <AnimatedSpan className="text-muted-foreground">
           {translations("profilecomplete")}
-        </TypingAnimation>
+        </AnimatedSpan>
 
         {/*<TypingAnimation className="text-muted-foreground">
           Take a look at my portfolio.
         </TypingAnimation>*/}
-        <TypingAnimation className="text-muted-foreground">
+        <AnimatedSpan className="text-muted-foreground">
           {translations("portfolio")}
-        </TypingAnimation>
+        </AnimatedSpan>
       </Terminal>
 
       <div className="size-70 hidden sm:block">

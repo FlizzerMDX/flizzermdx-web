@@ -1,13 +1,24 @@
 {
   "HomePage": {
+    "welcome": "Bienvenue! Mon nom est <name></name>",
     "iam": {
-      "begin": "Je suis ",
-      "developer": "un développeur",
-      "gamer": "un gamer incroyable",
-      "javascript": "un amoureux du JavaScript"
+      "begin": "Je suis un développeur ",
+      "tags": [
+        "Devops",
+        "Frontend",
+        "Backend",
+        "Full-stack",
+        "JavaScript",
+        "TypeScript",
+        "Python"
+      ]
     }
   },
   "Header": {
+    "home": "Accueil",
+    "projects": "Projets",
+    "about": "À propos",
+    "contact": "Contact",
     "locale": {
       "langselector": "Selectionne la langue",
       "en": "Anglais",
@@ -27,9 +38,19 @@
   },
   "Projects": {
     "filters":{
+      "label": "Filtres",
+      "attributes": "Attributs",
+      "allassigned": "Tout est assigné",
+      "noresult": "Aucun résultat",
+      "clearall": "Tout supprimer",
+      "confirmclear": "Es-tu sûr de vouloir supprimer tous les filtres ?",
+      "cancelclearbutton": "Annuler",
+      "confirmclearbutton": "Supprimer",
       "frameworks": "Framework",
       "languages": "Langage",
-      "runtimes": "Runtime"
+      "runtimes": "Runtime",
+      "situations": "Situations",
+      "organizations": "Organisations"
     },
     "nextjs-template":{
       "title": "Modèle Next.js",
