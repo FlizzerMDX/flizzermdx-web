@@ -8,11 +8,13 @@ projects:
     github:
       url: https://github.com/FlizzerMDX/nextjs-template
       api_url: https://api.github.com/repos/FlizzerMDX/nextjs-template
-    languages:
-      - HTML
-      - CSS
-      - JavaScript
-      - TypeScript
+    tags:
+      languages:
+        - html
+        - css
+        - typescript
+      frameworks:
+       - nextjs
   yoops:
     public: true
     situation:
@@ -21,15 +23,19 @@ projects:
     github:
       url: https://github.com/FlizzerMDX/yoops
       api_url: https://api.github.com/repos/FlizzerMDX/yoops
-    languages:
-      - Python
+    tags:
+      languages:
+        - python
+      frameworks:
+       - flask
   zeloria-bot-discord:
     public: false
     situation:
       type: free-time
       name: free-time
-    languages:
-      - Python
+    tags:
+      languages:
+        - python
   discord-ticket-reader:
     public: false
     situation:
@@ -38,11 +44,13 @@ projects:
     github:
       url: https://github.com/FlizzerMDX/discord-ticket-reader
       api_url: https://api.github.com/repos/FlizzerMDX/discord-ticket-reader
-    languages:
-      - HTML
-      - CSS
-      - JavaScript
-      - TypeScript
+    tags:
+      languages:
+        - html
+        - css
+        - typescript
+      frameworks:
+       - nextjs
   myplate:
     public: true
     situation:
@@ -51,11 +59,15 @@ projects:
     github:
       url: https://github.com/FlizzerMDX/myplate
       api_url: https://api.github.com/repos/FlizzerMDX/myplate
-    languages:
-      - HTML
-      - CSS
-      - JavaScript
-      - TypeScript
+    tags:
+      languages:
+        - html
+        - css
+        - typescript
+      frameworks:
+       - nextjs
+      runtimes:
+       - capacitorjs
   eeee:
     public: true
     situation:
@@ -64,20 +76,25 @@ projects:
     github:
       url: github.com/epfl-si/EPFL-Exchange-Exporter/
       api_url: https://api.github.com/repos/FlizzerMDX/EPFL-Exchange-Exporter
-    languages:
-      - HTML
-      - CSS
-      - JavaScript
-
-languages:
-  - HTML
-  - CSS
-  - JavaScript
-  - TypeScript
-  - Python
-
-tags:
-  - Open-source
-  - Next.js
-  - Flask
-  - Capacitor.js
+    tags:
+      languages:
+        - html
+        - css
+        - javascript
+      frameworks:
+       - nextjs
+  ticketshop:
+    public: true
+    situation:
+      type: internship
+      name: EPFL
+    github:
+      url: https://github.com/epfl-si/ticketshop
+      api_url: https://api.github.com/repos/epfl-si/ticketshop
+    tags:
+      languages:
+        - html
+        - css
+        - typescript
+      frameworks:
+       - nextjs

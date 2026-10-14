@@ -26,6 +26,11 @@
     "portfolio": "Take a look at my portfolio."
   },
   "Projects": {
+    "filters":{
+      "frameworks": "Framework",
+      "languages": "Language",
+      "runtimes": "Runtime"
+    },
     "nextjs-template":{
       "title": "Next.js template",
       "description": "Template Next.js for my websites"
@@ -49,6 +54,10 @@
     "eeee":{
       "title": "EEEE",
       "description": "Exchange Events Exporter for EPFL"
+    },
+    "ticketshop":{
+      "title": "Ticketshop",
+      "description": "Web service that CFF (the Swiss train company) queries to find out permissions and billing details for EPFL employees"
     }
   }
 }
