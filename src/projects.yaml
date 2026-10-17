@@ -100,3 +100,15 @@ projects:
        - internship
       organizations:
        - EPFL
+  drcv:
+    public: true
+    github:
+      url: https://github.com/epfl-si/drcv-esp32
+      api_url: https://api.github.com/repos/epfl-si/drcv-esp32
+    tags:
+      languages:
+        - arduino
+      situations:
+       - internship
+      organizations:
+       - EPFL

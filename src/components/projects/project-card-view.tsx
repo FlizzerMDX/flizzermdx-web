@@ -6,7 +6,7 @@ import Image from "next/image";
 import ProjectCard from "./project-card";
 import { cn } from "cn";
 import { useEffect, useState } from "react";
-import { getPreviewImageLink } from "@/utils/projects";
+import { getPreviewImageLink } from "@/lib/projects";
 
 const defaultImgSrc = `/projects/default_preview.png`;
 

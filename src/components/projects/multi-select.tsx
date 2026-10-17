@@ -13,7 +13,7 @@ const maxSelectionIcons = 4;
 export const MultiSelect = ({ selections, placeholder, selectedSelections, setSelectedSelections }: { selections: { id: string; translation: string; icon: React.JSX.Element }[]; placeholder: string; selectedSelections: string[]; setSelectedSelections: Dispatch<SetStateAction<string[]>> }) => {
   const [search, setSearch] = useState("");
   return (
-    <DropdownMenu>
+    <DropdownMenu modal={false}>
       <DropdownMenuTrigger asChild>
         <Button variant="outline" className="px-0 focus-visible:ring-0 text-muted-foreground hover:text-muted-foreground! w-30">
           {
@@ -50,7 +50,7 @@ export const MultiSelect = ({ selections, placeholder, selectedSelections, setSe
                     }
                   </AvatarGroup>
                 </HoverCardTrigger>
-                <HoverCardContent className="flex w-33 flex-col gap-0.5" align="start">
+                <HoverCardContent className="flex w-33 flex-col gap-0.5 z-10" align="start">
                   <div className="font-semibold">{placeholder.charAt(0).toUpperCase() + placeholder.slice(1) || "Selection"}</div>
                   <ul className="mt-1 ml-4 text-xs text-muted-foreground list-disc">
                     {
@@ -68,7 +68,7 @@ export const MultiSelect = ({ selections, placeholder, selectedSelections, setSe
           }
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56" align="start">
+      <DropdownMenuContent className="w-56 z-10" align="start">
         <div
           className="flex items-center px-2 pb-2 pt-1"
           onKeyDown={(e) => {

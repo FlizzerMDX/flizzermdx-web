@@ -10,9 +10,12 @@ import { ShineBorder } from "../ui/shine-border";
 import { useTranslations } from "next-intl";
 import { ReactNode } from "react";
 import { Project } from "@/types/project";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 export default function ProjectCard({ children, projectKey, project }: { children: ReactNode; projectKey: string; project: Project }) {
   const translations = useTranslations("Projects");
+  const pathname = usePathname();
   return (
     <Card className="relative w-70 h-90 max-w-sm pt-0">
       <ShineBorder shineColor={["#A07CFE", "#FE8FB5", "#FFBE7B"]} className="z-10" />
@@ -36,7 +39,9 @@ export default function ProjectCard({ children, projectKey, project }: { childre
         </CardDescription>
       </CardHeader>
       <CardFooter>
-        <Button className="w-full">View Details</Button>
+        <Link href={`${pathname}/${projectKey}`} className="w-full">
+          <Button className="w-full">View Details</Button>
+        </Link>
       </CardFooter>
     </Card>
   )

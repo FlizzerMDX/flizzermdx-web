@@ -79,6 +79,10 @@
     "ticketshop":{
       "title": "Ticketshop",
       "description": "Web service that CFF (the Swiss train company) queries to find out permissions and billing details for EPFL employees"
+    },
+    "drcv":{
+      "title": "DRCV",
+      "description": "Dsi Room Calendar View est un projet qui montre les réunions actuelles sur un écran e-ink"
     }
   }
 }

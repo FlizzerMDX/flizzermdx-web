@@ -7,7 +7,7 @@ import Filters from "./filters";
 import { SiCapacitor, SiFlask, SiJavascript, SiNextdotjs, SiPython, SiReact, SiTypescript } from "react-icons/si"
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
-import { getProjects } from "@/utils/projects";
+import { getProjects } from "@/lib/projects";
 import Image from "next/image";
 import { Construction, GraduationCap, TimerReset } from "lucide-react";
 
@@ -34,9 +34,9 @@ const situations = [
 ];
 
 const organizations = [
-  { id: "EPFL", translation: "EPFL", icon: <Image src="/logo/EPFL_logo.svg" alt="EPFL" width={40} height={40} className="h-full w-full object-contain dark:invert"/>},
-  { id: "ETML", translation: "ETML", icon: <Image src="/logo/ETML_logo.svg" alt="ETML" width={40} height={40} className="h-full w-full object-contain dark:invert"/>},
-  { id: "zeloria", translation: "zeloria", icon: <Image src="/logo/zeloria_logo.svg" alt="zeloria" width={40} height={40} className="h-full w-full object-contain dark:invert"/>},
+  { id: "EPFL", translation: "EPFL", icon: <Image src="/logos/EPFL_logo.svg" alt="EPFL" width={40} height={40} className="h-full w-full object-contain dark:invert"/>},
+  { id: "ETML", translation: "ETML", icon: <Image src="/logos/ETML_logo.svg" alt="ETML" width={40} height={40} className="h-full w-full object-contain dark:invert"/>},
+  { id: "zeloria", translation: "zeloria", icon: <Image src="/logos/zeloria_logo.svg" alt="zeloria" width={40} height={40} className="h-full w-full object-contain dark:invert"/>},
 ];
 
 export default function ProjectsView() {
