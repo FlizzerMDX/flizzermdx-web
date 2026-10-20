@@ -1,7 +1,6 @@
 'use client';
 
 import React, { memo, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
-import './LogoLoop.css';
 
 export type LogoItem =
   | {
@@ -183,6 +182,8 @@ interface EngineState {
 }
 
 const useIsomorphicLayoutEffect = typeof window === 'undefined' ? useEffect : useLayoutEffect;
+
+const cx = (...parts: Array<string | false | null | undefined>) => parts.filter(Boolean).join(' ');
 
 const SMOOTH_TAU = 0.25;
 const GLIDE_TAU = 0.8;
@@ -1163,90 +1164,130 @@ export const LogoLoop = memo<LogoLoopProps>(
       engineRef.current?.wake();
     });
 
-    const lists = useMemo(
-      () =>
-        Array.from({ length: copies }, (_, copyIndex) => {
-          const isPrimary = copyIndex === primary;
-          return (
-            <ul className="logoloop__list" key={copyIndex} role="list" aria-hidden={isPrimary ? undefined : true}>
-              {logos.map((item, itemIndex) => {
-                const key = `${copyIndex}-${itemIndex}`;
-                const isNode = 'node' in item;
-                const visual = renderItem ? (
-                  renderItem(item, key)
-                ) : isNode ? (
-                  <span className="logoloop__node" aria-hidden={!!item.href && !item.ariaLabel}>
-                    {item.node}
-                  </span>
-                ) : (
-                  <img
-                    src={item.src}
-                    srcSet={item.srcSet}
-                    sizes={item.sizes}
-                    width={item.width}
-                    height={item.height}
-                    alt={item.alt ?? ''}
-                    title={item.title}
-                    loading="lazy"
-                    decoding="async"
-                    draggable={false}
-                  />
-                );
-                const text = (labels === 'inline' || labels === 'below') && item.title ? item.title : null;
-                const inner = (
-                  <>
-                    {visual}
-                    {text && (
-                      <span className="logoloop__label" aria-hidden={!isNode && !!item.alt}>
-                        {text}
-                      </span>
-                    )}
-                  </>
-                );
-                const name = isNode ? (item.ariaLabel ?? item.title) : (item.alt ?? item.title);
-                return (
-                  <li
-                    className="logoloop__item"
-                    key={key}
-                    role="listitem"
-                    data-color={item.hoverColor ? '' : undefined}
-                    style={
-                      item.hoverColor
-                        ? ({ '--logoloop-item-color': item.hoverColor } as React.CSSProperties)
-                        : undefined
-                    }
-                  >
-                    {item.href ? (
-                      <a
-                        className="logoloop__content"
-                        href={item.href}
-                        aria-label={name || 'logo link'}
-                        target="_blank"
-                        rel="noreferrer noopener"
-                        draggable={false}
-                        tabIndex={isPrimary ? undefined : -1}
-                      >
-                        {inner}
-                      </a>
-                    ) : (
-                      <div className="logoloop__content">{inner}</div>
-                    )}
-                    {labels === 'hover' && item.title && (
-                      <span className="logoloop__tip" aria-hidden="true">
-                        {item.title}
-                      </span>
-                    )}
-                  </li>
-                );
-              })}
-            </ul>
-          );
-        }),
-      [copies, primary, logos, renderItem, labels]
-    );
+    const amount = clamp(muted, 0, 1);
+    const isMuted = amount > 0;
+
+    const lists = useMemo(() => {
+      const itemClass = cx(
+        'group/item relative flex-none text-[length:var(--logoloop-logoHeight)] leading-none group-data-[intro]/loop:opacity-0',
+        vertical ? 'mb-[var(--logoloop-gap)]' : 'mr-[var(--logoloop-gap)]'
+      );
+      const contentClass = (item: LogoItem) =>
+        cx(
+          'inline-flex items-center rounded text-inherit no-underline transition-[opacity,filter,color] duration-[350ms] ease-[ease] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current motion-reduce:transition-none',
+          labels === 'below'
+            ? 'flex-col gap-[calc(var(--logoloop-logoHeight)*0.22)]'
+            : 'gap-[calc(var(--logoloop-logoHeight)*0.3)]',
+          isMuted &&
+            '[filter:grayscale(var(--logoloop-gray))] opacity-[var(--logoloop-dim)] group-hover/item:[filter:none] group-hover/item:opacity-100 group-focus-within/item:[filter:none] group-focus-within/item:opacity-100 group-data-[active]/item:[filter:none] group-data-[active]/item:opacity-100',
+          item.hoverColor &&
+            'group-hover/item:text-[var(--logoloop-item-color)] group-focus-within/item:text-[var(--logoloop-item-color)] group-data-[active]/item:text-[var(--logoloop-item-color)]',
+          !isMuted && !item.hoverColor && !!item.href && 'hover:opacity-80'
+        );
+      const zoomClass = cx(
+        'transition-transform duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] motion-reduce:transition-none',
+        scaleOnHover && 'group-hover/item:scale-120'
+      );
+      const labelClass =
+        labels === 'below'
+          ? 'whitespace-nowrap text-[length:max(11px,calc(var(--logoloop-logoHeight)*0.26))] font-medium leading-[1.2] opacity-[0.72]'
+          : 'whitespace-nowrap text-[length:max(12px,calc(var(--logoloop-logoHeight)*0.5))] font-semibold leading-[1.2] tracking-[-0.01em]';
+      const tipClass = cx(
+        'pointer-events-none absolute whitespace-nowrap text-[length:max(11px,calc(var(--logoloop-logoHeight)*0.26))] font-medium leading-[1.2] opacity-0 transition-[opacity,translate] duration-[250ms] ease-[ease] motion-reduce:transition-none group-hover/item:opacity-80 group-focus-within/item:opacity-80 group-data-[active]/item:opacity-80',
+        vertical
+          ? 'left-full top-1/2 ml-[calc(var(--logoloop-logoHeight)*0.25)] [translate:4px_-50%] group-hover/item:[translate:0_-50%] group-focus-within/item:[translate:0_-50%] group-data-[active]/item:[translate:0_-50%]'
+          : 'left-1/2 top-full mt-[calc(var(--logoloop-logoHeight)*0.2)] [translate:-50%_4px] group-hover/item:[translate:-50%_0] group-focus-within/item:[translate:-50%_0] group-data-[active]/item:[translate:-50%_0]'
+      );
+      return Array.from({ length: copies }, (_, copyIndex) => {
+        const isPrimary = copyIndex === primary;
+        return (
+          <ul
+            className={cx('m-0 flex list-none items-center p-0', vertical && 'flex-col')}
+            key={copyIndex}
+            role="list"
+            aria-hidden={isPrimary ? undefined : true}
+          >
+            {logos.map((item, itemIndex) => {
+              const key = `${copyIndex}-${itemIndex}`;
+              const isNode = 'node' in item;
+              const visual = renderItem ? (
+                renderItem(item, key)
+              ) : isNode ? (
+                <span
+                  className={cx('inline-flex items-center', zoomClass)}
+                  aria-hidden={!!item.href && !item.ariaLabel}
+                >
+                  {item.node}
+                </span>
+              ) : (
+                <img
+                  className={cx(
+                    'pointer-events-none block h-[var(--logoloop-logoHeight)] w-auto object-contain [-webkit-user-drag:none] [image-rendering:-webkit-optimize-contrast]',
+                    zoomClass
+                  )}
+                  src={item.src}
+                  srcSet={item.srcSet}
+                  sizes={item.sizes}
+                  width={item.width}
+                  height={item.height}
+                  alt={item.alt ?? ''}
+                  title={item.title}
+                  loading="lazy"
+                  decoding="async"
+                  draggable={false}
+                />
+              );
+              const text = (labels === 'inline' || labels === 'below') && item.title ? item.title : null;
+              const inner = (
+                <>
+                  {visual}
+                  {text && (
+                    <span className={labelClass} aria-hidden={!isNode && !!item.alt}>
+                      {text}
+                    </span>
+                  )}
+                </>
+              );
+              const name = isNode ? (item.ariaLabel ?? item.title) : (item.alt ?? item.title);
+              return (
+                <li
+                  className={itemClass}
+                  key={key}
+                  role="listitem"
+                  data-color={item.hoverColor ? '' : undefined}
+                  style={
+                    item.hoverColor ? ({ '--logoloop-item-color': item.hoverColor } as React.CSSProperties) : undefined
+                  }
+                >
+                  {item.href ? (
+                    <a
+                      className={contentClass(item)}
+                      href={item.href}
+                      aria-label={name || 'logo link'}
+                      target="_blank"
+                      rel="noreferrer noopener"
+                      draggable={false}
+                      tabIndex={isPrimary ? undefined : -1}
+                    >
+                      {inner}
+                    </a>
+                  ) : (
+                    <div className={contentClass(item)}>{inner}</div>
+                  )}
+                  {labels === 'hover' && item.title && (
+                    <span className={tipClass} aria-hidden="true">
+                      {item.title}
+                    </span>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
+        );
+      });
+    }, [copies, primary, logos, renderItem, labels, vertical, scaleOnHover, isMuted]);
 
     const mask = fadeOut ? fadeMask(fadeOutWidth, vertical) : undefined;
-    const amount = clamp(muted, 0, 1);
 
     const containerStyle = {
       width: vertical
@@ -1264,14 +1305,13 @@ export const LogoLoop = memo<LogoLoopProps>(
       ...style
     } as React.CSSProperties;
 
-    const rootClassName = [
-      'logoloop',
-      vertical ? 'logoloop--vertical' : 'logoloop--horizontal',
-      scaleOnHover && 'logoloop--scale-hover',
+    const rootClassName = cx(
+      'group/loop relative overflow-hidden [-webkit-tap-highlight-color:transparent]',
+      vertical ? 'inline-block h-full px-[var(--logoloop-pad)]' : 'py-[var(--logoloop-pad)]',
+      draggable && 'cursor-grab data-[dragging]:cursor-grabbing [&[data-dragging]_*]:cursor-grabbing',
+      draggable && (vertical ? '[touch-action:pan-x_pinch-zoom]' : '[touch-action:pan-y_pinch-zoom]'),
       className
-    ]
-      .filter(Boolean)
-      .join(' ');
+    );
 
     return (
       <div
@@ -1285,7 +1325,13 @@ export const LogoLoop = memo<LogoLoopProps>(
         data-muted={amount > 0 ? '' : undefined}
         data-labels={labels !== 'none' ? labels : undefined}
       >
-        <div className="logoloop__track" ref={trackRef}>
+        <div
+          className={cx(
+            'relative z-0 flex select-none will-change-transform [-webkit-user-select:none]',
+            vertical ? 'h-max w-full flex-col' : 'w-max'
+          )}
+          ref={trackRef}
+        >
           {lists}
         </div>
       </div>

@@ -1,16 +1,16 @@
 {
   "HomePage": {
-    "welcome": "Hello There! My name is <name></name>",
+    "welcome": "Hello There! 👋",
     "iam": {
       "begin": "I am a ",
       "tags": [
-        "Devops developer",
         "Frontend developer",
         "Backend developer",
         "Full-stack developer",
         "JavaScript developer",
         "TypeScript developer",
-        "Python developer"
+        "Python developer",
+        "Devops developer"
       ]
     }
   },
@@ -52,6 +52,7 @@
       "situations": "Situations",
       "organizations": "Organizations"
     },
+    "details": "View Details",
     "nextjs-template":{
       "title": "Next.js template",
       "description": "Template Next.js for my websites"

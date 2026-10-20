@@ -9,10 +9,11 @@ import FiltersSelect from "./filters-select"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover"
 import { useTranslations } from "next-intl"
+import { DropDownElementsType } from "@/types/project"
 
 function ClearAll(
   { showedDropdownElements, setShowedDropdownElements, dropdownElements }:
-    { showedDropdownElements: string[]; setShowedDropdownElements: Dispatch<SetStateAction<string[]>>; dropdownElements: { name: string; translate: string; selections: { id: string; translation: string; icon: React.JSX.Element; }[]; value: string[]; setter: Dispatch<SetStateAction<string[]>>; }[] }) {
+    { showedDropdownElements: string[]; setShowedDropdownElements: Dispatch<SetStateAction<string[]>>; dropdownElements: DropDownElementsType[] }) {
   const [clearAllOpen, setClearAllOpen] = useState(false);
   const translations = useTranslations("Projects.filters");
 
@@ -46,9 +47,9 @@ function ClearAll(
   )
 }
 
-export default function Filters({ dropdownElements }: { dropdownElements: { name: string; translate: string; selections: { id: string; translation: string; icon: React.JSX.Element; }[]; value: string[]; setter: Dispatch<SetStateAction<string[]>>; }[] }) {
+export default function Filters({ dropdownElements, showedDropdownElements, setShowedDropdownElements }: { dropdownElements: DropDownElementsType[]; showedDropdownElements: string[]; setShowedDropdownElements: Dispatch<SetStateAction<string[]>>; }) {
   const [search, setSearch] = useState("");
-  const [showedDropdownElements, setShowedDropdownElements] = useState<string[]>([]);
+  // const [showedDropdownElements, setShowedDropdownElements] = useState<string[]>([]);
   const translations = useTranslations("Projects.filters");
 
   const handleDelete = (element: { name: string; translate: string; selections: { id: string; translation: string; icon: JSX.Element; }[]; value: string[]; setter: Dispatch<SetStateAction<string[]>>; }) => {
@@ -111,7 +112,7 @@ export default function Filters({ dropdownElements }: { dropdownElements: { name
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56 z-10" align="start">
               <div
-                className="flex items-center px-2 pb-2 pt-1"
+                className="hidden sm:flex items-center px-2 pb-2 pt-1"
                 onKeyDown={(e) => {
                   e.stopPropagation()
                 }}
@@ -124,7 +125,7 @@ export default function Filters({ dropdownElements }: { dropdownElements: { name
                   onChange={(e) => setSearch(e.target.value)}
                 />
               </div>
-              <DropdownMenuSeparator />
+              <DropdownMenuSeparator className="hidden sm:block" />
               <DropdownMenuGroup>
                 <DropdownMenuLabel>{translations("attributes")}</DropdownMenuLabel>
                 {

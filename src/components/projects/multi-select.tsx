@@ -7,10 +7,11 @@ import { Dispatch, SetStateAction, useState } from "react";
 import { Input } from "../ui/input";
 import { Avatar, AvatarFallback, AvatarGroup, AvatarGroupCount } from "../ui/avatar";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "../ui/hover-card";
+import { FiltersElementsType } from "@/types/project";
 
 const maxSelectionIcons = 4;
 
-export const MultiSelect = ({ selections, placeholder, selectedSelections, setSelectedSelections }: { selections: { id: string; translation: string; icon: React.JSX.Element }[]; placeholder: string; selectedSelections: string[]; setSelectedSelections: Dispatch<SetStateAction<string[]>> }) => {
+export const MultiSelect = ({ selections, placeholder, selectedSelections, setSelectedSelections }: FiltersElementsType) => {
   const [search, setSearch] = useState("");
   return (
     <DropdownMenu modal={false}>
@@ -70,7 +71,7 @@ export const MultiSelect = ({ selections, placeholder, selectedSelections, setSe
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56 z-10" align="start">
         <div
-          className="flex items-center px-2 pb-2 pt-1"
+          className="hidden sm:flex items-center px-2 pb-2 pt-1"
           onKeyDown={(e) => {
             e.stopPropagation()
           }}
@@ -84,7 +85,7 @@ export const MultiSelect = ({ selections, placeholder, selectedSelections, setSe
             onChange={(e) => setSearch(e.target.value)}
           />
         </div>
-        <DropdownMenuSeparator />
+        <DropdownMenuSeparator className="hidden sm:block" />
         <DropdownMenuGroup>
           <DropdownMenuLabel>Attributes</DropdownMenuLabel>
           {

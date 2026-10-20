@@ -4,16 +4,13 @@ import { ButtonGroup } from "../ui/button-group";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuTrigger } from "../ui/dropdown-menu";
 import { Dispatch, SetStateAction } from "react";
 import { MultiSelect } from "./multi-select";
+import { FiltersElementsType } from "@/types/project";
+
+type FilterSelectType = FiltersElementsType & {handleDelete: () => void}
 
 export default function FiltersSelect(
   { selections, selectedSelections, setSelectedSelections, placeholder, handleDelete }
-    : {
-      selections: { id: string; translation: string; icon: React.JSX.Element }[];
-      selectedSelections: string[];
-      setSelectedSelections: Dispatch<SetStateAction<string[]>>;
-      placeholder: string;
-      handleDelete: () => void
-    }) {
+    : FilterSelectType) {
 
   const handleClear = () => {
     setSelectedSelections([]);

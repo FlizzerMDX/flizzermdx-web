@@ -3,8 +3,6 @@
 import { useEffect, useRef } from 'react';
 import type { CSSProperties } from 'react';
 
-import './TechText.css';
-
 type Box = { x1: number; y1: number; x2: number; y2: number };
 type Art = { image: HTMLCanvasElement; left: number; top: number };
 type Shape = { char: string; x: number; box: Box };
@@ -1062,8 +1060,14 @@ const TechText = ({
   }, []);
 
   return (
-    <div ref={containerRef} className={`tech-text ${className}`.trim()} style={style} role="img" aria-label={text}>
-      <canvas ref={canvasRef} className="tech-text-canvas" />
+    <div
+      ref={containerRef}
+      className={`relative w-full h-full touch-pan-y select-none ${className}`.trim()}
+      style={style}
+      role="img"
+      aria-label={text}
+    >
+      <canvas ref={canvasRef} className="block w-full h-full" />
     </div>
   );
 };

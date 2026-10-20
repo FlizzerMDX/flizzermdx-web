@@ -14,6 +14,8 @@ import Link from "next/link";
 import { ScrollProgress } from "../ui/scroll-progress";
 import { cn } from "@/lib/utils";
 import { useTranslations } from "next-intl";
+import { getStars } from "@/lib/github";
+import { AuroraText } from "../ui/aurora-text";
 
 export default function Header() {
   const path = usePathname();
@@ -30,10 +32,8 @@ export default function Header() {
 
   useEffect(() => {
     const fetchStarsCount = async () => {
-      const res = await fetch(config.github.project.api_url);
-      const data = await res.json();
-      console.log(data.stargazers_count || 0)
-      setStarsCount(data.stargazers_count || 0);
+      const stars = await getStars(config.github.project.owner, config.github.project.repo);
+      setStarsCount(stars);
     };
     fetchStarsCount();
   }, []);
@@ -41,21 +41,20 @@ export default function Header() {
   return (
     <>
       <header className="flex flex-row justify-between px-4 pt-4 bg-background">
-        <div className="flex flex-row gap-2 items-center">
+        <div className="flex flex-row gap-2 items-center select-none">
           <Globe color="#999999" />
-          {/*<Image src="/rick_face.svg" alt="rick face" width={24} height={24} className="w-6 dark:invert"/>*/}
           <span className="font-semibold">
             /
           </span>
-          <Link href={config.github.profile.url} className="text-sm font-medium hover:underline">
-            @{config.github.profile.username}
+          <Link href={config.github.profile.url} className="text-sm font-medium">
+            <AuroraText>@{config.github.profile.username}</AuroraText>
           </Link>
         </div>
         <div className="flex flex-row gap-2">
           <ThemeToggle />
           <LocaleToggle />
           <Button variant="outline" asChild>
-            <a href={config.github.project.url} target="_blank" className="flex items-center">
+            <Link href={`https://github.com/${config.github.project.owner}/${config.github.project.repo}`} target="_blank" className="flex items-center">
               <GitHubLogoIcon />
               <StarIcon fill="currentColor" size={16} className="text-yellow-500 mr-1 hidden sm:block" />
               <NumberTicker
@@ -63,7 +62,7 @@ export default function Header() {
                 className="hidden sm:block font-medium tracking-tighter whitespace-pre-wrap"
               />
               <ArrowUpRightIcon size={16} />
-            </a>
+            </Link>
           </Button>
         </div>
       </header>
@@ -75,7 +74,6 @@ export default function Header() {
               <Link
                 key={tab.label}
                 href={tab.href}
-                // className={"relative rounded-md flex items-center h-8 px-4 z-20 bg-transparent cursor-pointer select-none transition-colors"}
                 className="relative rounded-lg px-4 py-2"
                 onMouseEnter={() => setActiveTab(tab.href)}
               >

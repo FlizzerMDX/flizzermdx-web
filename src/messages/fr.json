@@ -1,16 +1,16 @@
 {
   "HomePage": {
-    "welcome": "Bienvenue! Mon nom est <name></name>",
+    "welcome": "Bienvenue! 👋",
     "iam": {
       "begin": "Je suis un développeur ",
       "tags": [
-        "Devops",
         "Frontend",
         "Backend",
         "Full-stack",
         "JavaScript",
         "TypeScript",
-        "Python"
+        "Python",
+        "Devops"
       ]
     }
   },
@@ -52,6 +52,7 @@
       "situations": "Situations",
       "organizations": "Organisations"
     },
+    "details": "Voir les détails",
     "nextjs-template":{
       "title": "Modèle Next.js",
       "description": "Modèle Next.js pour mes sites web"

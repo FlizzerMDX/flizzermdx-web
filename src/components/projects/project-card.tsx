@@ -9,11 +9,21 @@ import { ShineBorder } from "../ui/shine-border";
 
 import { useTranslations } from "next-intl";
 import { ReactNode } from "react";
-import { Project } from "@/types/project";
+import { DropDownElementsType, Project } from "@/types/project";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 
-export default function ProjectCard({ children, projectKey, project }: { children: ReactNode; projectKey: string; project: Project }) {
+export default function ProjectCard({ children, projectKey, project, tags, showedDropdownElements, setShowedDropdownElements }: { children: ReactNode; projectKey: string; project: Project; tags: DropDownElementsType[]; showedDropdownElements: string[]; setShowedDropdownElements: React.Dispatch<React.SetStateAction<string[]>>;}) {
+
+  const handleTag = (id: string, category: string, setter: React.Dispatch<React.SetStateAction<string[]>>, value: string[]) => {
+    if (!value.includes(id)) {
+      setter((prev) => [...prev, id])
+      if (!showedDropdownElements.includes(category)) {
+        setShowedDropdownElements((prev) => [...prev, category])
+      }
+    }
+  }
+
   const translations = useTranslations("Projects");
   const pathname = usePathname();
   return (
@@ -25,11 +35,15 @@ export default function ProjectCard({ children, projectKey, project }: { childre
         {children}
       </AspectRatio>
       <CardHeader>
-        <CardAction>
-          <Badge variant="outline">
-            <BookmarkIcon data-icon="inline-end" />
-            Featured
-          </Badge>
+        <CardAction className="flex flex-col gap-1 justify-end items-end">
+          {
+            tags.map((tag) => ({ ...tag, selections: tag.selections.filter((selection) => (project.tags[tag.name as (keyof typeof project.tags)] as string[])?.includes(selection.id)) })).filter((tag) => Object.entries(tag.selections).length > 0).map((tag) => tag?.selections?.length > 0 ? tag?.selections?.map((selection) => (
+              <Badge variant="outline" className="hover:cursor-pointer select-none" key={selection.id} onClick={() => handleTag(selection.id, tag.name, tag.setter, tag.value)}>
+                {selection.icon}
+                {selection.translation}
+              </Badge>
+            )) : <div key={tag.name}>test</div>)
+          }
         </CardAction>
         <CardTitle className="h-11">{ translations(`${projectKey}.title`) }</CardTitle>
         <CardDescription className="h-20">
@@ -40,7 +54,7 @@ export default function ProjectCard({ children, projectKey, project }: { childre
       </CardHeader>
       <CardFooter>
         <Link href={`${pathname}/${projectKey}`} className="w-full">
-          <Button className="w-full">View Details</Button>
+          <Button className="w-full">{translations("details")}</Button>
         </Link>
       </CardFooter>
     </Card>

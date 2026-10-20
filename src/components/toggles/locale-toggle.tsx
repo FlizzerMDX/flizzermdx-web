@@ -54,7 +54,7 @@ export const LocaleToggle = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline">
+        <Button variant="outline" name="LocaleButton">
           <Languages className="h-4 w-4" />
           <span className="hidden sm:block">{translations(language)}</span>
         </Button>

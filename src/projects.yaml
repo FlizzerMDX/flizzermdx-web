@@ -3,8 +3,8 @@ projects:
     public: true
     preview: invert dark:invert-0
     github:
-      url: https://github.com/FlizzerMDX/nextjs-template
-      api_url: https://api.github.com/repos/FlizzerMDX/nextjs-template
+      owner: FlizzerMDX
+      repo: nextjs-template
     tags:
       languages:
         - html
@@ -18,8 +18,8 @@ projects:
     public: true
     situation:
     github:
-      url: https://github.com/FlizzerMDX/yoops
-      api_url: https://api.github.com/repos/FlizzerMDX/yoops
+      owner: FlizzerMDX
+      repo: yoops
     tags:
       languages:
         - python
@@ -39,8 +39,8 @@ projects:
   discord-ticket-reader:
     public: false
     github:
-      url: https://github.com/FlizzerMDX/discord-ticket-reader
-      api_url: https://api.github.com/repos/FlizzerMDX/discord-ticket-reader
+      owner: FlizzerMDX
+      repo: discord-ticket-reader
     tags:
       languages:
         - html
@@ -55,8 +55,8 @@ projects:
   myplate:
     public: true
     github:
-      url: https://github.com/FlizzerMDX/myplate
-      api_url: https://api.github.com/repos/FlizzerMDX/myplate
+      owner: FlizzerMDX
+      repo: myplate
     tags:
       languages:
         - html
@@ -71,8 +71,8 @@ projects:
   eeee:
     public: true
     github:
-      url: github.com/epfl-si/EPFL-Exchange-Exporter/
-      api_url: https://api.github.com/repos/FlizzerMDX/EPFL-Exchange-Exporter
+      owner: epfl-si
+      repo: EPFL-Exchange-Exporter
     tags:
       languages:
         - html
@@ -87,8 +87,8 @@ projects:
   ticketshop:
     public: true
     github:
-      url: https://github.com/epfl-si/ticketshop
-      api_url: https://api.github.com/repos/epfl-si/ticketshop
+      owner: epfl-si
+      repo: ticketshop
     tags:
       languages:
         - html
@@ -103,8 +103,8 @@ projects:
   drcv:
     public: true
     github:
-      url: https://github.com/epfl-si/drcv-esp32
-      api_url: https://api.github.com/repos/epfl-si/drcv-esp32
+      owner: epfl-si
+      repo: drcv-esp32
     tags:
       languages:
         - arduino

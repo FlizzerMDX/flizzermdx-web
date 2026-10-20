@@ -1,6 +1,6 @@
 "use client"
 
-import { Project, ProjectsConfig } from "@/types/project";
+import { DropDownElementsType, Project, ProjectsConfig } from "@/types/project";
 import ProjectCardView from "./project-card-view";
 
 import Filters from "./filters";
@@ -51,6 +51,7 @@ export default function ProjectsView() {
   }, [])
 
   const translations = useTranslations("Projects.filters");
+  const [showedDropdownElements, setShowedDropdownElements] = useState<string[]>([]);
 
   const [selectedFrameworks, setSelectedFrameworks] = useState<string[]>([]);
   const [selectedLanguages, setSelectedLanguages] = useState<string[]>([]);
@@ -58,7 +59,7 @@ export default function ProjectsView() {
   const [selectedSituations, setSelectedSituations] = useState<string[]>([]);
   const [selectedOrganizations, setSelectedOrganizations] = useState<string[]>([]);
 
-  const dropdownElements = [
+  const dropdownElements: DropDownElementsType[] = [
     {
       name: "frameworks",
       translate: translations("frameworks"),
@@ -98,7 +99,7 @@ export default function ProjectsView() {
 
   return (
     <div className="flex flex-1 flex-col items-center gap-2 mx-auto">
-      <Filters dropdownElements={dropdownElements} />
+      <Filters dropdownElements={dropdownElements} showedDropdownElements={showedDropdownElements} setShowedDropdownElements={setShowedDropdownElements} />
       <div className="flex flex-row flex-wrap justify-center mx-auto gap-4">
         {
           projects && Object.entries(projects.projects)
@@ -115,7 +116,7 @@ export default function ProjectsView() {
                   true
             )))
             .map(([key, value]) => (
-            <ProjectCardView key={key} projectKey={key} project={value as Project} />
+              <ProjectCardView key={key} projectKey={key} project={value as Project} tags={dropdownElements} showedDropdownElements={showedDropdownElements} setShowedDropdownElements={setShowedDropdownElements} />
           ))
         }
       </div>

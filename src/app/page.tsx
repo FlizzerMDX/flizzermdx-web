@@ -1,22 +1,22 @@
-"use client"
+"use server"
 
-import { AuroraText } from "@/components/ui/aurora-text";
 import { Backlight } from "@/components/ui/backlight";
 import { Lottie, LottieDisplay } from "lottie-react";
-import { useLocale, useTranslations } from "next-intl";
-import { Typewriter } from "react-simple-typewriter";
 
 import LogoLoop from "@/components/react-bits/LogoLoop";
-import { SiNextdotjs, SiTypescript, SiTailwindcss, SiShadcnui, SiLucide } from 'react-icons/si';
-import { useMemo } from "react";
+import { SiNextdotjs, SiTypescript, SiTailwindcss, SiShadcnui } from 'react-icons/si';
 import { MagicUiIcon, ReactBitsIcon, NextIntlIcon, PacocourseyIcon, LucideIcon, MotionIcon, RadixUiIcon, LottieReactIcon } from "@/components/global/icons";
 import Link from "next/link";
+import { getLocale, getTranslations } from "next-intl/server";
+import dynamic from "next/dynamic";
+// import RotateTech from "@/components/react-bits/rotate-tech";
+const RotateTech = dynamic(() => import('@/components/global/rotate-tech'))
 
-export default function Home() {
-  const translations = useTranslations('HomePage');
-  const locale = useLocale();
+export default async function Home() {
+  const translations = await getTranslations('HomePage');
+  const locale = await getLocale();
 
-  const techLogos = useMemo(() => [
+  const techLogos = [
     { node: <SiNextdotjs size={24} />, title: "Next.js", href: "https://nextjs.org" },
     { node: <SiTypescript size={24} />, title: "TypeScript", href: "https://www.typescriptlang.org", hoverColor: "#3178c6" },
     { node: <SiTailwindcss size={24} />, title: "Tailwind CSS", href: "https://tailwindcss.com", hoverColor: "#38bdf8" },
@@ -29,23 +29,27 @@ export default function Home() {
     { node: <MotionIcon size={24} />, title: "Motion", href: "https://motion.dev" },
     { node: <RadixUiIcon size={24} />, title: "Radix UI", href: "https://www.radix-ui.com" },
     { node: <LottieReactIcon size={24} className="grayscale hover:grayscale-0" />, title: "Lottie React", href: "https://lottiereact.com" },
-  ], []);
+  ];
 
   return (
     <div className="flex-1 flex flex-col w-full">
       <div className="flex-1 flex gap-2 flex-col sm:flex-row">
         <div className="w-full mx-auto text-left text-lg sm:text-2xl">
           <div>
-            {translations.rich("welcome", {name: () => <AuroraText>FlizzerMDX</AuroraText>})}
+            {translations.rich("welcome", {name: () => <span className="font-semibold">FlizzerMDX</span>})}
           </div>
-          {translations("iam.begin")}
-          <Typewriter words={translations.raw("iam.tags") as string[]} cursor cursorColor="white" cursorStyle="▌" loop />
+          <p className="inline">
+            {translations("iam.begin")}
+            <span className="inline-flex">
+              <RotateTech techs={translations.raw("iam.tags") as string[]} />
+            </span>
+          </p>
         </div>
 
         <div className="flex items-center justify-center h-full">
-          <Link target="_blank" href={`https://${locale || "fr"}.wikipedia.org/wiki/Rick_et_Morty`}>
+          <Link target="_blank" href={`https://${locale || "fr"}.wikipedia.org/wiki/Rick_${(locale || "fr") == "fr" ? "et" : "and"}_Morty`}>
             <Backlight blur={8}>
-              <Lottie src="/rick.json" className="size-52 sm:size-78" autoplay loop>
+              <Lottie src="/rick.json" title="rick sanchez" className="size-52 sm:size-78" autoplay loop>
                 <LottieDisplay/>
               </Lottie>
             </Backlight>
