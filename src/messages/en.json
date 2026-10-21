@@ -84,6 +84,10 @@
     "drcv":{
       "title": "DRCV",
       "description": "Dsi Room Calendar View is a project which show actual meeting of a room, in an e-ink display"
+    },
+    "flizzermdx-web":{
+      "title": "FlizzerMDX portfolio website",
+      "description": "FlizzerMDX portfolio website (website that you are in actually)"
     }
   }
 }

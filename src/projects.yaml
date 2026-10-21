@@ -112,3 +112,15 @@ projects:
        - internship
       organizations:
        - EPFL
+  flizzermdx-web:
+    public: true
+    github:
+      owner: FlizzerMDX
+      repo: flizzermdx-web
+    tags:
+      frameworks:
+        - nextjs
+      languages:
+        - typescript
+      situations:
+       - freetime
